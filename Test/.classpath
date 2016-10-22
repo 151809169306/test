@@ -8,5 +8,8 @@
 	<classpathentry kind="lib" path="lib/junit.jar"/>
 	<classpathentry kind="lib" path="lib/rabbitmq-client-tests.jar"/>
 	<classpathentry kind="lib" path="lib/rabbitmq-client.jar"/>
+	<classpathentry kind="lib" path="lib/iText-5.0.6.jar"/>
+	<classpathentry kind="lib" path="lib/com.lowagie.text-2.1.7.jar"/>
+	<classpathentry kind="lib" path="lib/iTextAsian.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -4,7 +4,7 @@
  * Copyright 2016 Netease, Inc. All rights reserved.
  * NETEASE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
-package com.test.age;
+package com.test.common;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,11 +17,9 @@ import java.util.Map;
 public class Test {
     public static void main(String args[]) {
 
-        String teString = "XDYH:1~gzyhClear:1,666:2,gzyhClear:1";
+        String teString = " ";
 
-        String ss = new Test().mapRoleCodeFromLcToJj(teString);
-
-        System.out.println(ss);
+        System.out.println(teString.length());
     }
 
     public String mapRoleCodeFromLcToJj(String roleCode) {
