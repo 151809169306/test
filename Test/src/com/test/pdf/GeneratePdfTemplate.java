@@ -1,14 +1,10 @@
 
 package com.test.pdf;
 
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.AcroFields;
@@ -32,32 +28,27 @@ public class GeneratePdfTemplate {
             //2 读入pdf表单
             PdfReader reader = new PdfReader("d:/test.pdf");
             //3 根据表单生成一个新的pdf
-            PdfStamper ps = new PdfStamper(reader,
+            PdfStamper pdfStamper = new PdfStamper(reader,
                 new FileOutputStream("d:/newPdf.pdf"));
             //4 获取pdf表单
-
-            AcroFields s = ps.getAcroFields();
-
+            AcroFields acroFields = pdfStamper.getAcroFields();
             //5给表单添加中文字体 
             BaseFont bfChinese = BaseFont.createFont("STSong-Light",
                 "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
-            s.addSubstitutionFont(bfChinese);
-
+            acroFields.addSubstitutionFont(bfChinese);
             //6遍历pdf表单表格，同时给表格赋值
-            Map<String, Item> fieldMap = s.getFields();
-            Set<Map.Entry<String, Item>> set = fieldMap.entrySet();
-            Iterator<Map.Entry<String, Item>> iterator = set.iterator();
-            
-            while (iterator.hasNext()) {
-                Entry<String, Item> entry = iterator.next();
-                String key = entry.getKey();
-                if (paraMap.get(key) != null) {
-                    s.setFieldProperty(key,"textsize",10f,null);
-                    s.setField(key, paraMap.get(key));
+            for (Map.Entry<String, Item> fileMapEntry: acroFields.getFields()
+                .entrySet()) {
+                String fieldNameKey = fileMapEntry.getKey();
+                String paraMapValue = paraMap.get(fieldNameKey);
+                if (paraMapValue != null) {
+                    acroFields.setFieldProperty(fieldNameKey, "textsize", 10f,
+                        null);
+                    acroFields.setField(fieldNameKey, paraMapValue);
                 }
             }
-            ps.setFormFlattening(true);
-            ps.close();
+            pdfStamper.setFormFlattening(true);
+            pdfStamper.close();
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
